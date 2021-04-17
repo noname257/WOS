@@ -15,7 +15,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build -t noname257/wos2 . "
+                    sh "docker build -t noname257/wos . "
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push noname257/wos2:latest
+                docker push noname257/wos:latest
                 '''
             }
         }
@@ -41,7 +41,7 @@ pipeline  {
             steps {
                 echo " ============== stoping all images =================="
                 sh '''
-                docker stop wos2
+                docker stop wos
                 '''
             }
         } 
@@ -49,7 +49,7 @@ pipeline  {
             steps {
                 echo " ============== removing all docker containers =================="
                 sh '''
-                docker rm wos2
+                docker rm wos
                 '''
             }
         }
@@ -57,7 +57,7 @@ pipeline  {
             steps {
                 echo " ============== starting chatterbox server =================="
                 sh '''
-                docker run -d --restart=always --name wos2 -p 80:3000 noname257/wos2
+                docker run -d --restart=always --name wos -p 80:3000 noname257/wos
                 '''
             }
         }

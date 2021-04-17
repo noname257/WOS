@@ -15,7 +15,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build -t prozaira/wos . "
+                    sh "docker build -t macnaer/wos2 . "
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push prozaira/wos:latest
+                docker push macnaer/wos2:latest
                 '''
             }
         }
@@ -41,7 +41,7 @@ pipeline  {
             steps {
                 echo " ============== stoping all images =================="
                 sh '''
-                docker stop wos
+                docker stop wos2
                 '''
             }
         } 
@@ -49,7 +49,7 @@ pipeline  {
             steps {
                 echo " ============== removing all docker containers =================="
                 sh '''
-                docker rm wos
+                docker rm wos2
                 '''
             }
         }
@@ -57,7 +57,7 @@ pipeline  {
             steps {
                 echo " ============== starting chatterbox server =================="
                 sh '''
-                docker run -d --restart=always --name wos -p 80:3000 prozaira/wos
+                docker run -d --restart=always --name wos2 -p 80:3000 macnaer/wos2
                 '''
             }
         }
